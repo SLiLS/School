@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace School.BLL.DTO
 {
- public class ClassTeacher
+ public class ClassTeacherDTO
     {
         public int TeacherId { get; set; }
         public int ClassTeacherId { get; set; }

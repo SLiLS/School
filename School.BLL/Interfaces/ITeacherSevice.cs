@@ -12,7 +12,7 @@ namespace School.BLL.Interfaces
         void Create(TeacherDTO item);
         void Update(TeacherDTO item);
         void Delete(int id);
-        //void AddNewClass(ClassTeacherDTO item);
+        void AddNewClass(ClassTeacherDTO item);
         TeacherDTO Get(int id);
         IEnumerable<TeacherDTO> GetAll();
         void Dispose();
