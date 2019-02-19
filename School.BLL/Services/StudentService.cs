@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using School.DAL.Entities;
 using School.DAL.Interfaces;
 using School.DAL.Repositories;
-using 
+using AutoMapper;
 
 namespace School.BLL.Services
 {
@@ -25,7 +25,7 @@ namespace School.BLL.Services
 
             uow.Students.Create(new Student
             {
-                ClassId = item.ClassId,
+                SchoolClassId = item.ClassId,
                 MiddleName = item.MiddleName,
                 Name = item.Name,
                 Sex = item.Sex,
@@ -44,7 +44,7 @@ namespace School.BLL.Services
         {
             uow.Students.Update(new Student
             {
-                ClassId = item.ClassId,
+                SchoolClassId = item.ClassId,
                 MiddleName = item.MiddleName,
                 Name = item.Name,
                 Sex = item.Sex,
@@ -59,7 +59,7 @@ namespace School.BLL.Services
             Student student = uow.Students.Get(id);
             return new StudentDTO
             {
-                ClassId = student.ClassId,
+                ClassId = student.SchoolClassId,
                 SurName = student.SurName,
                 Id = student.Id,
                 MiddleName = student.MiddleName,
@@ -70,7 +70,7 @@ namespace School.BLL.Services
         }
         public IEnumerable<StudentDTO> GetAll()
         {
-            var map = new MapperConfiguration(c => c.CreateMap<Student, StudentDTO>()).CreateMapper();
+            var map = new MapperConfiguration(c => c.CreateMap<Student, StudentDTO>().ForMember(s=>s.ClassName,sx=>sx.MapFrom(w=>w.ScoolClass.Name)).ForMember(s => s.ClassId, sx => sx.MapFrom(w => w.ScoolClass.Id))).CreateMapper();
             return map.Map<IEnumerable<Student>, IEnumerable<StudentDTO>>(uow.Students.GetAll());
         }
         public void Dispose()

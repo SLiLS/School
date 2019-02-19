@@ -11,12 +11,12 @@ namespace School.DAL.Entities
         
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Student> Students { get; set; }
+      
         public ICollection<Teacher> Teachers { get; set; }
         public SchoolClass()
         {
             Teachers = new List<Teacher>();
-            Students = new List<Student>();
+          
 
         }
 

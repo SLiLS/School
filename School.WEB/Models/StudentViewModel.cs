@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace School.DAL.Entities
+namespace School.WEB.Models
 {
-  public  class Student
+    public class StudentViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string MiddleName { set; get; }
         public string SurName { get; set; }
         public string Sex { get; set; }
-        public int SchoolClassId { get; set; }
-        public SchoolClass ScoolClass { get; set; }
+        public int ClassId { get; set; }
+        public string ClassName { get; set; }
     }
 }
