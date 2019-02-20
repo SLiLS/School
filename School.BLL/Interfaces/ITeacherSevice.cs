@@ -15,6 +15,7 @@ namespace School.BLL.Interfaces
         void AddNewClass(ClassTeacherDTO item);
         TeacherDTO Get(int id);
         IEnumerable<TeacherDTO> GetAll();
+        IEnumerable<SchoolClassDTO> GetTeacherClasses(int id);
         void Dispose();
     }
 }

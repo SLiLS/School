@@ -23,21 +23,31 @@ namespace School.WEB.Controllers
                 classRepository   = new ClassRepository();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int? schoolclass,string sex)
         {
+            var maper = new MapperConfiguration(c => c.CreateMap<SchoolClassDTO, SchoolClassViewModel>()).CreateMapper();
+
+            var classes=maper.Map<IEnumerable<SchoolClassDTO>, List<SchoolClassViewModel>>(classRepository.GetAll());
+          
+            classes.Insert(0, new SchoolClassViewModel { Id = 0, Name = "Все" });
+        
+
+            ViewBag.Classes = new SelectList(classes, "Id", "Name");
+
             var map = new MapperConfiguration(c => c.CreateMap<StudentDTO, StudentViewModel>()).CreateMapper();
              
-            return View(map.Map<IEnumerable<StudentDTO>, IEnumerable<StudentViewModel>>(studentService.GetAll()));
+            return View(map.Map<IEnumerable<StudentDTO>, IEnumerable<StudentViewModel>>(studentService.Search(schoolclass,sex)));
         }
         public ActionResult Delete(int id)
         {
             studentService.Delete(id);
             return RedirectToAction("Index");
         }
+       
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.Companies = new SelectList(classRepository.GetAll(), "Id", "Name");
+            ViewBag.Classes = new SelectList(classRepository.GetAll(), "Id", "Name");
             return PartialView();
 
         }
@@ -72,13 +82,13 @@ namespace School.WEB.Controllers
         {
             var map = new MapperConfiguration(c => c.CreateMap<StudentDTO, StudentViewModel>()).CreateMapper();
 
-        
+            ViewBag.Classes = new SelectList(classRepository.GetAll(), "Id", "Name");
 
 
             return PartialView(map.Map<StudentDTO, StudentViewModel>(studentService.Get(id)));
         }
         [HttpPost]
-        public ActionResult Edit(StudentViewModel item)//Редактирование сотрудника
+        public ActionResult Edit(StudentViewModel item)
         {
             var map = new MapperConfiguration(c => c.CreateMap<StudentViewModel, StudentDTO>()).CreateMapper();
 

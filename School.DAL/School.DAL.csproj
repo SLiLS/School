@@ -57,13 +57,9 @@
     <Compile Include="Interfaces\IStudentRepository.cs" />
     <Compile Include="Interfaces\ITeacherRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
-    <Compile Include="Migrations\201902192310034_Create.cs" />
-    <Compile Include="Migrations\201902192310034_Create.Designer.cs">
-      <DependentUpon>201902192310034_Create.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902192321230_SchoolClassId.cs" />
-    <Compile Include="Migrations\201902192321230_SchoolClassId.Designer.cs">
-      <DependentUpon>201902192321230_SchoolClassId.cs</DependentUpon>
+    <Compile Include="Migrations\201902200010374_Create.cs" />
+    <Compile Include="Migrations\201902200010374_Create.Designer.cs">
+      <DependentUpon>201902200010374_Create.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,11 +73,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201902192310034_Create.resx">
-      <DependentUpon>201902192310034_Create.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902192321230_SchoolClassId.resx">
-      <DependentUpon>201902192321230_SchoolClassId.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902200010374_Create.resx">
+      <DependentUpon>201902200010374_Create.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

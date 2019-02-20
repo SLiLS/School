@@ -22,12 +22,12 @@ namespace School.DAL.Repositories
         public Student Get(int id)
         {
 
-            return db.Students.Include(c => c.ScoolClass).Where(d => d.Id == id).FirstOrDefault();
+            return db.Students.Include(c => c.SchoolClass).Where(d => d.Id == id).FirstOrDefault();
         }
         public IEnumerable<Student> GetAll()
         {
            
-            return db.Students.Include(c => c.ScoolClass);
+            return db.Students.Include(c => c.SchoolClass);
         }
         public void Delete(int id)
         {

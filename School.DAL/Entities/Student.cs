@@ -14,6 +14,6 @@ namespace School.DAL.Entities
         public string SurName { get; set; }
         public string Sex { get; set; }
         public int SchoolClassId { get; set; }
-        public SchoolClass ScoolClass { get; set; }
+        public SchoolClass SchoolClass { get; set; }
     }
 }

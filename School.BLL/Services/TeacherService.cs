@@ -63,5 +63,11 @@ namespace School.BLL.Services
             uow.Dispose();
 
         }
+        public IEnumerable<SchoolClassDTO> GetTeacherClasses(int id)
+        {
+            var s = uow.SchoolClasses.GetAll().Where(w=>w.Id==id);
+            var map = new MapperConfiguration(c => c.CreateMap<SchoolClass, SchoolClassDTO>()).CreateMapper();
+            return map.Map<IEnumerable<SchoolClass>, IEnumerable<SchoolClassDTO>>(s);
+        }
     }
 }

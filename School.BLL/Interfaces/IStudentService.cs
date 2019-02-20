@@ -14,6 +14,7 @@ namespace School.BLL.Interfaces
         void Update(StudentDTO item);
         StudentDTO Get(int id);
         IEnumerable<StudentDTO> GetAll();
+        IEnumerable<StudentDTO> Search(int? schoolclass,string sex);
         void Dispose();
     }
 }

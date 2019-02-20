@@ -70,13 +70,29 @@ namespace School.BLL.Services
         }
         public IEnumerable<StudentDTO> GetAll()
         {
-            var map = new MapperConfiguration(c => c.CreateMap<Student, StudentDTO>().ForMember(s=>s.ClassName,sx=>sx.MapFrom(w=>w.ScoolClass.Name)).ForMember(s => s.ClassId, sx => sx.MapFrom(w => w.ScoolClass.Id))).CreateMapper();
+            var map = new MapperConfiguration(c => c.CreateMap<Student, StudentDTO>().ForMember(s=>s.ClassName,sx=>sx.MapFrom(w=>w.SchoolClass.Name)).ForMember(s => s.ClassId, sx => sx.MapFrom(w => w.SchoolClass.Id))).CreateMapper();
             return map.Map<IEnumerable<Student>, IEnumerable<StudentDTO>>(uow.Students.GetAll());
         }
         public void Dispose()
         {
             uow.Dispose();
 
+        }
+        public IEnumerable<StudentDTO> Search(int? schoolclass, string sex)
+        {
+          IEnumerable<Student> students=  uow.Students.GetAll();
+            schoolclass=(schoolclass ?? 0);
+            if(schoolclass!=0)
+            {
+                students = students.Where(s => s.SchoolClass.Id == schoolclass);
+            }
+            if(sex!=null&& sex!="")
+            {
+                students = students.Where(s => s.Sex.Contains(sex));
+            }
+            var map = new MapperConfiguration(c => c.CreateMap<Student, StudentDTO>().ForMember(s => s.ClassName, sx => sx.MapFrom(w => w.SchoolClass.Name)).ForMember(s => s.ClassId, sx => sx.MapFrom(w => w.SchoolClass.Id))).CreateMapper();
+            return map.Map<IEnumerable<Student>, IEnumerable<StudentDTO>>(students);
+           
         }
     }
 }

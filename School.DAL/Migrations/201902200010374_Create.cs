@@ -37,12 +37,11 @@ namespace School.DAL.Migrations
                         MiddleName = c.String(),
                         SurName = c.String(),
                         Sex = c.String(),
-                        ClassId = c.Int(nullable: false),
-                        ScoolClass_Id = c.Int(),
+                        SchoolClassId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.SchoolClasses", t => t.ScoolClass_Id)
-                .Index(t => t.ScoolClass_Id);
+                .ForeignKey("dbo.SchoolClasses", t => t.SchoolClassId, cascadeDelete: true)
+                .Index(t => t.SchoolClassId);
             
             CreateTable(
                 "dbo.TeacherSchoolClasses",
@@ -61,12 +60,12 @@ namespace School.DAL.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.Students", "ScoolClass_Id", "dbo.SchoolClasses");
+            DropForeignKey("dbo.Students", "SchoolClassId", "dbo.SchoolClasses");
             DropForeignKey("dbo.TeacherSchoolClasses", "SchoolClass_Id", "dbo.SchoolClasses");
             DropForeignKey("dbo.TeacherSchoolClasses", "Teacher_Id", "dbo.Teachers");
             DropIndex("dbo.TeacherSchoolClasses", new[] { "SchoolClass_Id" });
             DropIndex("dbo.TeacherSchoolClasses", new[] { "Teacher_Id" });
-            DropIndex("dbo.Students", new[] { "ScoolClass_Id" });
+            DropIndex("dbo.Students", new[] { "SchoolClassId" });
             DropTable("dbo.TeacherSchoolClasses");
             DropTable("dbo.Students");
             DropTable("dbo.Teachers");
